@@ -1,0 +1,38 @@
+<html>
+  <canvas id="canvas" width="800" height="600"></canvas>
+    <script>
+      var strings = [];
+      class String {
+        constructor(name, str, speed, startX){
+          this.str = str;
+          this.speed = speed;
+          this.x = startX;
+          this.pLen = str.length*5;
+          strings.unshift(name);
+        }
+        end(){
+          strings.pop();
+        }
+      }
+      window.onload = function(){
+        var cvs = document.getElementById("canvas");
+        var ctx = cvs.getContext("2d");
+        var myString = new String(myString, "this is my new string", 1, cvs.width);
+        strings = [myString];
+        setInterval(function(){
+          ctx.fillStyle = "black";
+          ctx.fillRect(0, 0, cvs.width, cvs.height);
+          for(s=-1; s<3; s++){
+            ctx.fillStyle = "red";
+            ctx.fillText(strings[s].str, strings[s].x, 20)
+            strings[s].x --;
+            if(strings[s].x < -strings[s].pLen){
+              strings[s].end();
+              s --;
+            }
+          }
+        }, 10)
+      }
+    </script>
+
+</html>
